@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProductsFloatverseRouteImport } from './routes/products.floatverse'
 import { Route as ProductsPotterlevitateRouteImport } from './routes/products.potterlevitate'
 import { Route as ProductsWizardFloatLampRouteImport } from './routes/products.wizard-float-lamp'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductsFloatverseRoute = ProductsFloatverseRouteImport.update({
+  id: '/products/floatverse',
+  path: '/products/floatverse',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProductsPotterlevitateRoute = ProductsPotterlevitateRouteImport.update({
@@ -31,34 +37,47 @@ const ProductsWizardFloatLampRoute = ProductsWizardFloatLampRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/products/floatverse': typeof ProductsFloatverseRoute
   '/products/potterlevitate': typeof ProductsPotterlevitateRoute
   '/products/wizard-float-lamp': typeof ProductsWizardFloatLampRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/products/floatverse': typeof ProductsFloatverseRoute
   '/products/potterlevitate': typeof ProductsPotterlevitateRoute
   '/products/wizard-float-lamp': typeof ProductsWizardFloatLampRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/products/floatverse': typeof ProductsFloatverseRoute
   '/products/potterlevitate': typeof ProductsPotterlevitateRoute
   '/products/wizard-float-lamp': typeof ProductsWizardFloatLampRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/products/potterlevitate' | '/products/wizard-float-lamp'
+  fullPaths:
+    | '/'
+    | '/products/floatverse'
+    | '/products/potterlevitate'
+    | '/products/wizard-float-lamp'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/products/potterlevitate' | '/products/wizard-float-lamp'
+  to:
+    | '/'
+    | '/products/floatverse'
+    | '/products/potterlevitate'
+    | '/products/wizard-float-lamp'
   id:
     | '__root__'
     | '/'
+    | '/products/floatverse'
     | '/products/potterlevitate'
     | '/products/wizard-float-lamp'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ProductsFloatverseRoute: typeof ProductsFloatverseRoute
   ProductsPotterlevitateRoute: typeof ProductsPotterlevitateRoute
   ProductsWizardFloatLampRoute: typeof ProductsWizardFloatLampRoute
 }
@@ -70,6 +89,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/products/floatverse': {
+      id: '/products/floatverse'
+      path: '/products/floatverse'
+      fullPath: '/products/floatverse'
+      preLoaderRoute: typeof ProductsFloatverseRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/products/potterlevitate': {
@@ -91,6 +117,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ProductsFloatverseRoute: ProductsFloatverseRoute,
   ProductsPotterlevitateRoute: ProductsPotterlevitateRoute,
   ProductsWizardFloatLampRoute: ProductsWizardFloatLampRoute,
 }
