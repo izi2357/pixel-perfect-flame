@@ -38,7 +38,7 @@ export function ProductGallery({ images }: { images: ProductImage[] }) {
             width={1200}
             height={1200}
             fetchPriority="high"
-            className="aspect-square w-full animate-in fade-in object-cover duration-300"
+            className="aspect-square w-full animate-in fade-in object-contain duration-300"
           />
         </button>
         <span className="pointer-events-none absolute bottom-3 right-3 grid h-9 w-9 place-items-center rounded-full bg-background/85 text-ink">
@@ -47,7 +47,7 @@ export function ProductGallery({ images }: { images: ProductImage[] }) {
       </div>
 
       {/* Thumbnails */}
-      <div className="mt-3 grid grid-cols-4 gap-3 sm:gap-4">
+      <div className="mt-3 grid grid-cols-6 gap-2 sm:gap-3">
         {images.map((img, i) => (
           <button
             key={img.src}
@@ -67,7 +67,7 @@ export function ProductGallery({ images }: { images: ProductImage[] }) {
               width={400}
               height={400}
               loading="lazy"
-              className="aspect-square w-full object-cover"
+              className="aspect-square w-full object-contain"
             />
           </button>
         ))}

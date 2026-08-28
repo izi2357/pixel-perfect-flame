@@ -1,4 +1,3 @@
-import { Star } from "lucide-react";
 import { useState } from "react";
 import { VariantSelector } from "./VariantSelector";
 import { QuantitySelector } from "./QuantitySelector";
