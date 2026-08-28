@@ -152,6 +152,9 @@
 
   body {
     background-color: var(--color-background);
-    color: var(--color-foreground);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
   }
+
 }
