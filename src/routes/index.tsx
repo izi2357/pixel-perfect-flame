@@ -4,6 +4,7 @@ import { Header } from "@/components/store/Header";
 import { ProductGallery } from "@/components/store/ProductGallery";
 import { ProductInfo } from "@/components/store/ProductInfo";
 import { ProductDescription } from "@/components/store/ProductDescription";
+import { ReviewsSection } from "@/components/store/ReviewsSection";
 import { CartDrawer } from "@/components/store/CartDrawer";
 import { Footer } from "@/components/store/Footer";
 import { CartProvider } from "@/lib/cart";
@@ -64,6 +65,7 @@ function ProductPage() {
         <div className="border-t border-hairline">
           <ProductDescription product={product} />
         </div>
+        <ReviewsSection />
       </main>
       <Footer />
       <CartDrawer />
