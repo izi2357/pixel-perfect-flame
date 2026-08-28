@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { AppLink } from "./AppLink";
 import { Menu, Search, ShoppingCart, User, X } from "lucide-react";
 import { useState } from "react";
 import { useCart } from "@/lib/cart";
@@ -38,7 +38,7 @@ export function Header({
           </button>
           <nav aria-label="Main" className="hidden items-center gap-1 lg:flex">
             {product.nav.map((item, i) => (
-              <Link
+              <AppLink
                 key={item.label}
                 to={item.to}
                 className={`rounded-full px-3.5 py-2 text-[14px] font-medium transition-colors ${
@@ -48,20 +48,20 @@ export function Header({
                 }`}
               >
                 {item.label}
-              </Link>
+              </AppLink>
             ))}
           </nav>
         </div>
 
         {/* Center: logo */}
         <div className={centeredLogo ? "flex shrink-0 justify-center" : "flex flex-1"}>
-          <Link to={`/products/${product.slug}`} aria-label={`${product.brand} home`}>
+          <AppLink to={`/products/${product.slug}`} aria-label={`${product.brand} home`}>
             <img
               src={product.logo}
               alt={`${product.brand} logo`}
               className={`${product.logoWidthClass} w-auto object-contain`}
             />
-          </Link>
+          </AppLink>
         </div>
 
         {/* Right: utility icons */}
@@ -124,22 +124,22 @@ export function Header({
               </button>
             </div>
             <nav aria-label="Mobile" className="mt-6 flex flex-col">
-              <Link
+              <AppLink
                 to="/"
                 onClick={() => setMenuOpen(false)}
                 className={`border-b ${border} py-3.5 text-[17px] font-medium`}
               >
                 All stores
-              </Link>
+              </AppLink>
               {product.nav.map((item) => (
-                <Link
+                <AppLink
                   key={item.label}
                   to={item.to}
                   onClick={() => setMenuOpen(false)}
                   className={`border-b ${border} py-3.5 text-[17px] font-medium`}
                 >
                   {item.label}
-                </Link>
+                </AppLink>
               ))}
             </nav>
           </div>
