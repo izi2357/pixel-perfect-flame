@@ -10,33 +10,76 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProductsFloatverseRouteImport } from './routes/products.floatverse'
+import { Route as ProductsPotterlevitateRouteImport } from './routes/products.potterlevitate'
+import { Route as ProductsWizardFloatLampRouteImport } from './routes/products.wizard-float-lamp'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProductsFloatverseRoute = ProductsFloatverseRouteImport.update({
+  id: '/products/floatverse',
+  path: '/products/floatverse',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductsPotterlevitateRoute = ProductsPotterlevitateRouteImport.update({
+  id: '/products/potterlevitate',
+  path: '/products/potterlevitate',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductsWizardFloatLampRoute = ProductsWizardFloatLampRouteImport.update({
+  id: '/products/wizard-float-lamp',
+  path: '/products/wizard-float-lamp',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/products/floatverse': typeof ProductsFloatverseRoute
+  '/products/potterlevitate': typeof ProductsPotterlevitateRoute
+  '/products/wizard-float-lamp': typeof ProductsWizardFloatLampRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/products/floatverse': typeof ProductsFloatverseRoute
+  '/products/potterlevitate': typeof ProductsPotterlevitateRoute
+  '/products/wizard-float-lamp': typeof ProductsWizardFloatLampRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/products/floatverse': typeof ProductsFloatverseRoute
+  '/products/potterlevitate': typeof ProductsPotterlevitateRoute
+  '/products/wizard-float-lamp': typeof ProductsWizardFloatLampRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/products/floatverse'
+    | '/products/potterlevitate'
+    | '/products/wizard-float-lamp'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/products/floatverse'
+    | '/products/potterlevitate'
+    | '/products/wizard-float-lamp'
+  id:
+    | '__root__'
+    | '/'
+    | '/products/floatverse'
+    | '/products/potterlevitate'
+    | '/products/wizard-float-lamp'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ProductsFloatverseRoute: typeof ProductsFloatverseRoute
+  ProductsPotterlevitateRoute: typeof ProductsPotterlevitateRoute
+  ProductsWizardFloatLampRoute: typeof ProductsWizardFloatLampRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +91,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/products/floatverse': {
+      id: '/products/floatverse'
+      path: '/products/floatverse'
+      fullPath: '/products/floatverse'
+      preLoaderRoute: typeof ProductsFloatverseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/products/potterlevitate': {
+      id: '/products/potterlevitate'
+      path: '/products/potterlevitate'
+      fullPath: '/products/potterlevitate'
+      preLoaderRoute: typeof ProductsPotterlevitateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/products/wizard-float-lamp': {
+      id: '/products/wizard-float-lamp'
+      path: '/products/wizard-float-lamp'
+      fullPath: '/products/wizard-float-lamp'
+      preLoaderRoute: typeof ProductsWizardFloatLampRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ProductsFloatverseRoute: ProductsFloatverseRoute,
+  ProductsPotterlevitateRoute: ProductsPotterlevitateRoute,
+  ProductsWizardFloatLampRoute: ProductsWizardFloatLampRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

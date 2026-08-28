@@ -77,12 +77,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Prime Utopia — Considered Home Décor & Lighting" },
+      { title: "Levitation Lamp Collection — Floating Collector Lamps" },
       {
         name: "description",
-        content: "Atmospheric lighting and home décor, with shipping costs included on every item.",
+        content:
+          "Three levitating collector lamp stores in one place, with bundle offers and free worldwide shipping.",
       },
-      { property: "og:site_name", content: "Prime Utopia" },
+      { property: "og:site_name", content: "Levitation Lamp Collection" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -97,7 +98,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap",
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", type: "image/png", href: "/favicon.png" },
     ],
   }),
 
