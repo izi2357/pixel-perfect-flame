@@ -68,14 +68,7 @@ export function ProductInfo({ product }: { product: Product }) {
         </p>
       </div>
 
-      <dl className="mt-8 divide-y divide-hairline border-t border-hairline text-[14px]">
-        {product.specifications.map((spec) => (
-          <div key={spec.label} className="grid grid-cols-[minmax(0,110px)_minmax(0,1fr)] gap-4 py-3">
-            <dt className="text-ink-muted">{spec.label}</dt>
-            <dd className="min-w-0 text-ink">{spec.value}</dd>
-          </div>
-        ))}
-      </dl>
+
     </div>
   );
 }
