@@ -17,7 +17,9 @@ export function ProductGallery({ images }: { images: ProductImage[] }) {
     return () => window.removeEventListener("keydown", onKey);
   }, [lightbox, images.length]);
 
-  const current = images[active];
+  const current = images[active] ?? images[0];
+  if (!current) return null;
+
 
   return (
     <div>
