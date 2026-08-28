@@ -10,33 +10,43 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProductsPotterlevitateRouteImport } from './routes/products.potterlevitate'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProductsPotterlevitateRoute = ProductsPotterlevitateRouteImport.update({
+  id: '/products/potterlevitate',
+  path: '/products/potterlevitate',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/products/potterlevitate': typeof ProductsPotterlevitateRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/products/potterlevitate': typeof ProductsPotterlevitateRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/products/potterlevitate': typeof ProductsPotterlevitateRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/products/potterlevitate'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/products/potterlevitate'
+  id: '__root__' | '/' | '/products/potterlevitate'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ProductsPotterlevitateRoute: typeof ProductsPotterlevitateRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +58,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/products/potterlevitate': {
+      id: '/products/potterlevitate'
+      path: '/products/potterlevitate'
+      fullPath: '/products/potterlevitate'
+      preLoaderRoute: typeof ProductsPotterlevitateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ProductsPotterlevitateRoute: ProductsPotterlevitateRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
