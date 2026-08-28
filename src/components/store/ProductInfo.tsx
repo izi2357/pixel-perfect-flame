@@ -20,16 +20,8 @@ export function ProductInfo({ product }: { product: Product }) {
         {product.name}
       </h1>
 
-      <div className="mt-3 flex items-center gap-2">
-        <span className="flex items-center gap-0.5" aria-hidden>
-          {Array.from({ length: 5 }).map((_, i) => (
-            <Star key={i} className="h-[15px] w-[15px] fill-ink text-ink" />
-          ))}
-        </span>
-        <span className="text-[14px] text-ink">
-          {product.rating.toFixed(1)} ({product.reviewCount} reviews)
-        </span>
-      </div>
+
+
 
       <div className="mt-3.5 flex flex-wrap items-center gap-3">
         {onSale && (
