@@ -10,12 +10,16 @@ import {
 
 export type CartItem = {
   id: string;
-  name: string;
-  color: string;
-  size: string;
+  productId: string;
+  brand: string;
+  title: string;
+  variant?: string;
   price: number;
+  compareAtPrice?: number;
   quantity: number;
   image: string;
+  currencySymbol: string;
+  kind: "bundle" | "upsell";
 };
 
 type CartState = {
@@ -25,13 +29,14 @@ type CartState = {
   isOpen: boolean;
   open: () => void;
   close: () => void;
-  addItem: (item: Omit<CartItem, "id">) => void;
+  addItems: (items: Omit<CartItem, "id">[]) => void;
   updateQuantity: (id: string, quantity: number) => void;
   removeItem: (id: string) => void;
+  clear: () => void;
 };
 
 const CartContext = createContext<CartState | null>(null);
-const STORAGE_KEY = "pu-cart-v1";
+const STORAGE_KEY = "levitate-cart-v1";
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
@@ -54,16 +59,20 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
   }, [items]);
 
-  const addItem = useCallback((item: Omit<CartItem, "id">) => {
-    const id = `${item.name}|${item.color}|${item.size}`;
+  const addItems = useCallback((incoming: Omit<CartItem, "id">[]) => {
     setItems((prev) => {
-      const existing = prev.find((i) => i.id === id);
-      if (existing) {
-        return prev.map((i) =>
-          i.id === id ? { ...i, quantity: i.quantity + item.quantity } : i,
-        );
+      const next = [...prev];
+      for (const item of incoming) {
+        const id = `${item.productId}|${item.kind}|${item.variant ?? item.title}`;
+        const idx = next.findIndex((i) => i.id === id);
+        if (idx >= 0) {
+          const existing = next[idx]!;
+          next[idx] = { ...existing, quantity: existing.quantity + item.quantity };
+        } else {
+          next.push({ ...item, id });
+        }
       }
-      return [...prev, { ...item, id }];
+      return next;
     });
   }, []);
 
@@ -79,19 +88,23 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setItems((prev) => prev.filter((i) => i.id !== id));
   }, []);
 
-  const value = useMemo<CartState>(() => {
-    return {
+  const clear = useCallback(() => setItems([]), []);
+
+  const value = useMemo<CartState>(
+    () => ({
       items,
-      count: items.reduce((n, i) => n + i.quantity, 0),
+      count: items.reduce((n, i) => n + (i.kind === "bundle" ? i.quantity : 0), 0),
       subtotal: items.reduce((n, i) => n + i.quantity * i.price, 0),
       isOpen,
       open: () => setIsOpen(true),
       close: () => setIsOpen(false),
-      addItem,
+      addItems,
       updateQuantity,
       removeItem,
-    };
-  }, [items, isOpen, addItem, updateQuantity, removeItem]);
+      clear,
+    }),
+    [items, isOpen, addItems, updateQuantity, removeItem, clear],
+  );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }
