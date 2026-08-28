@@ -38,32 +38,6 @@ export const product: Product = {
     { src: img5, alt: "Dragon Breath Flame Night Light Decor" },
     { src: img6, alt: "Dragon Breath Flame Night Light Decor" },
   ],
-  colors: string[];
-  sizes: string[];
-  features: { title: string; body: string }[];
-};
-
-export const product: Product = {
-  name: "Dragon Breath Flame Night Light Decor",
-  handle: "dragon-breath-flame-night-light-decor",
-  description:
-    "Transform any room into an atmospheric sanctuary with the Dragon Breath Flame Night Light — a mesmerising décor piece that mimics the hypnotic dance of real fire without the heat or hazard.",
-  price: 22,
-  compareAtPrice: 30,
-  currency: "GBP",
-  currencySymbol: "£",
-  images: [
-    { src: img1, alt: "Dragon Breath Flame Night Light glowing on a wooden desk at night" },
-    {
-      src: img2,
-      alt: "Dragon Breath Flame Night Light on a child's bookshelf casting a warm golden glow",
-    },
-    { src: img3, alt: "Close-up of the Dragon Breath Flame Night Light against a dark background" },
-    {
-      src: img4,
-      alt: "Blue variant of the Dragon Breath Flame Night Light on a bedside table",
-    },
-  ],
   colors: ["Golden", "Blue"],
   sizes: ["Small", "Large"],
   features: [
@@ -88,7 +62,6 @@ export const product: Product = {
       body: "A striking statement piece that guests will notice and admire instantly.",
     },
   ],
-
 };
 
 export function formatPrice(amount: number, symbol = product.currencySymbol) {
