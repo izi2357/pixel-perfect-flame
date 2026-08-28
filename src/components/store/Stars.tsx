@@ -1,7 +1,7 @@
 /**
  * Solid star icon matching the reference review widget (FontAwesome solid star).
  */
-function StarIcon({ size }: { size: number }) {
+export function StarGlyph({ size }: { size: number }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -36,7 +36,7 @@ export function Stars({
   const row = (color: string) => (
     <div className={`flex ${color}`} style={{ gap: 0 }}>
       {Array.from({ length: 5 }).map((_, i) => (
-        <StarIcon key={i} size={size} />
+        <StarGlyph key={i} size={size} />
       ))}
     </div>
   );

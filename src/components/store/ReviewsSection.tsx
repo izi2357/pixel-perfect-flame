@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { ChevronRight, Images, X } from "lucide-react";
-import { Stars } from "./Stars";
+import { StarGlyph, Stars } from "./Stars";
 import { reviewPhotos, reviewSummary, reviews as seedReviews, type Review } from "@/data/reviews";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 function ReviewCard({ review, onPhoto }: { review: Review; onPhoto: (src: string) => void }) {
   const photo = review.photos[0];
+  const [ratio, setRatio] = useState<number | null>(null);
 
   return (
     <div className="mb-4 break-inside-avoid overflow-hidden rounded-[4px] border border-review-border bg-background">
@@ -20,6 +21,11 @@ function ReviewCard({ review, onPhoto }: { review: Review; onPhoto: (src: string
             src={photo}
             alt={`Customer photo from ${review.author}`}
             loading="lazy"
+            onLoad={(e) => {
+              const el = e.currentTarget;
+              setRatio(Math.max(el.naturalWidth / el.naturalHeight, 9 / 16));
+            }}
+            style={ratio ? { aspectRatio: String(ratio) } : undefined}
             className="block w-full object-cover"
           />
           {review.photos.length > 1 && (
@@ -108,7 +114,7 @@ function WriteReviewModal({
                 aria-label={`${n} star${n > 1 ? "s" : ""}`}
                 className={n <= rating ? "text-review-star" : "text-review-star-empty"}
               >
-                <Stars rating={1} size={22} className="w-[22px] overflow-hidden" />
+                <StarGlyph size={22} />
               </button>
             ))}
           </div>
@@ -188,7 +194,7 @@ export function ReviewsSection() {
               <span className="flex w-[26px] items-center gap-1 text-[13px] text-review-date">
                 {d.stars}
                 <span className={d.count ? "text-review-star" : "text-review-star-empty"}>
-                  <Stars rating={1} size={13} className="w-[13px] overflow-hidden" />
+                  <StarGlyph size={13} />
                 </span>
               </span>
               <span className="h-[9px] min-w-0 flex-1 overflow-hidden rounded-[4px] bg-review-track">
