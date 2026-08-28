@@ -1,24 +1,75 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { AnnouncementBar } from "@/components/store/AnnouncementBar";
+import { Header } from "@/components/store/Header";
+import { ProductGallery } from "@/components/store/ProductGallery";
+import { ProductInfo } from "@/components/store/ProductInfo";
+import { ProductDescription } from "@/components/store/ProductDescription";
+import { CartDrawer } from "@/components/store/CartDrawer";
+import { Footer } from "@/components/store/Footer";
+import { CartProvider } from "@/lib/cart";
+import { product } from "@/data/product";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+const TITLE = "Dragon Breath Flame Night Light Decor | Atmospheric LED Flame Lamp";
+const DESCRIPTION =
+  "Dragon Breath Flame Night Light Decor — a realistic LED flame lamp that fills any room with warm, flickering ambience. Golden or blue, small or large. £22.00, shipping included.";
+
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: TITLE },
+      { name: "description", content: DESCRIPTION },
+      { property: "og:title", content: TITLE },
+      { property: "og:description", content: DESCRIPTION },
+      { property: "og:type", content: "product" },
+      { property: "og:url", content: "/" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+    links: [{ rel: "canonical", href: "/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Product",
+          name: product.name,
+          description: product.description,
+          brand: { "@type": "Brand", name: "Prime Utopia" },
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: product.rating,
+            reviewCount: product.reviewCount,
+          },
+          offers: {
+            "@type": "Offer",
+            price: product.price.toFixed(2),
+            priceCurrency: product.currency,
+            availability: "https://schema.org/InStock",
+          },
+        }),
+      },
+    ],
+  }),
+  component: ProductPage,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+function ProductPage() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <CartProvider>
+      <AnnouncementBar message="All items include shipping costs ✨" />
+      <Header />
+      <main>
+        <section className="mx-auto max-w-[1280px] px-5 py-8 lg:px-10 lg:py-12">
+          <div className="grid gap-8 lg:grid-cols-2 lg:gap-14 xl:gap-20">
+            <ProductGallery images={product.images} />
+            <ProductInfo product={product} />
+          </div>
+        </section>
+        <div className="border-t border-hairline">
+          <ProductDescription product={product} />
+        </div>
+      </main>
+      <Footer />
+      <CartDrawer />
+    </CartProvider>
   );
 }
