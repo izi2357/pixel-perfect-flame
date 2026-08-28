@@ -1,7 +1,9 @@
-import img1 from "@/assets/dragon-1.jpg";
-import img2 from "@/assets/dragon-2.jpg";
-import img3 from "@/assets/dragon-3.jpg";
-import img4 from "@/assets/dragon-4.jpg";
+import img1 from "@/assets/product-1.jpg";
+import img2 from "@/assets/product-2.png";
+import img3 from "@/assets/product-3.png";
+import img4 from "@/assets/product-4.png";
+import img5 from "@/assets/product-5.png";
+import img6 from "@/assets/product-6.png";
 
 export type ProductImage = { src: string; alt: string };
 
@@ -13,13 +15,10 @@ export type Product = {
   compareAtPrice: number;
   currency: string;
   currencySymbol: string;
-  rating: number;
-  reviewCount: number;
   images: ProductImage[];
   colors: string[];
   sizes: string[];
   features: { title: string; body: string }[];
-  specifications: { label: string; value: string }[];
 };
 
 export const product: Product = {
@@ -31,8 +30,28 @@ export const product: Product = {
   compareAtPrice: 30,
   currency: "GBP",
   currencySymbol: "£",
-  rating: 5,
-  reviewCount: 12,
+  images: [
+    { src: img1, alt: "Dragon Breath Flame Night Light Decor" },
+    { src: img2, alt: "Dragon Breath Flame Night Light Decor" },
+    { src: img3, alt: "Dragon Breath Flame Night Light Decor" },
+    { src: img4, alt: "Dragon Breath Flame Night Light Decor" },
+    { src: img5, alt: "Dragon Breath Flame Night Light Decor" },
+    { src: img6, alt: "Dragon Breath Flame Night Light Decor" },
+  ],
+  colors: string[];
+  sizes: string[];
+  features: { title: string; body: string }[];
+};
+
+export const product: Product = {
+  name: "Dragon Breath Flame Night Light Decor",
+  handle: "dragon-breath-flame-night-light-decor",
+  description:
+    "Transform any room into an atmospheric sanctuary with the Dragon Breath Flame Night Light — a mesmerising décor piece that mimics the hypnotic dance of real fire without the heat or hazard.",
+  price: 22,
+  compareAtPrice: 30,
+  currency: "GBP",
+  currencySymbol: "£",
   images: [
     { src: img1, alt: "Dragon Breath Flame Night Light glowing on a wooden desk at night" },
     {
@@ -69,13 +88,7 @@ export const product: Product = {
       body: "A striking statement piece that guests will notice and admire instantly.",
     },
   ],
-  specifications: [
-    { label: "Material", value: "Hand-finished resin with acrylic flame diffuser" },
-    { label: "Light source", value: "Warm-white flicker LED, 3000K" },
-    { label: "Power", value: "USB-C, 5V — under 3W" },
-    { label: "Dimensions", value: "Small 14 × 9 cm · Large 22 × 14 cm" },
-    { label: "In the box", value: "Night light, USB-C cable, wall mount kit" },
-  ],
+
 };
 
 export function formatPrice(amount: number, symbol = product.currencySymbol) {
