@@ -1,4 +1,3 @@
-import { Star } from "lucide-react";
 import { useState } from "react";
 import { VariantSelector } from "./VariantSelector";
 import { QuantitySelector } from "./QuantitySelector";
@@ -20,16 +19,8 @@ export function ProductInfo({ product }: { product: Product }) {
         {product.name}
       </h1>
 
-      <div className="mt-3 flex items-center gap-2">
-        <span className="flex items-center gap-0.5" aria-hidden>
-          {Array.from({ length: 5 }).map((_, i) => (
-            <Star key={i} className="h-[15px] w-[15px] fill-ink text-ink" />
-          ))}
-        </span>
-        <span className="text-[14px] text-ink">
-          {product.rating.toFixed(1)} ({product.reviewCount} reviews)
-        </span>
-      </div>
+
+
 
       <div className="mt-3.5 flex flex-wrap items-center gap-3">
         {onSale && (
@@ -76,14 +67,7 @@ export function ProductInfo({ product }: { product: Product }) {
         </p>
       </div>
 
-      <dl className="mt-8 divide-y divide-hairline border-t border-hairline text-[14px]">
-        {product.specifications.map((spec) => (
-          <div key={spec.label} className="grid grid-cols-[minmax(0,110px)_minmax(0,1fr)] gap-4 py-3">
-            <dt className="text-ink-muted">{spec.label}</dt>
-            <dd className="min-w-0 text-ink">{spec.value}</dd>
-          </div>
-        ))}
-      </dl>
+
     </div>
   );
 }
