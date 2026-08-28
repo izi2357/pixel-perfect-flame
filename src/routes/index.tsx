@@ -34,11 +34,8 @@ export const Route = createFileRoute("/")({
           name: product.name,
           description: product.description,
           brand: { "@type": "Brand", name: "Prime Utopia" },
-          aggregateRating: {
-            "@type": "AggregateRating",
-            ratingValue: product.rating,
-            reviewCount: product.reviewCount,
-          },
+          image: product.images.map((i) => i.src),
+
           offers: {
             "@type": "Offer",
             price: product.price.toFixed(2),
